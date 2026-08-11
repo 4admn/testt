@@ -1,0 +1,3 @@
+/system_ext/bin/laurel_boot_logger             u:object_r:laurel_boot_logger_exec:s0
+/system/system_ext/bin/laurel_boot_logger      u:object_r:laurel_boot_logger_exec:s0
+/metadata/boot-debug(/.*)?                     u:object_r:laurel_boot_debug_file:s0

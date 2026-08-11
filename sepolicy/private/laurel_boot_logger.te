@@ -1,0 +1,36 @@
+type laurel_boot_logger, domain, coredomain;
+type laurel_boot_logger_exec, system_file_type, exec_type, file_type;
+type laurel_boot_debug_file, file_type;
+
+init_daemon_domain(laurel_boot_logger)
+
+# Each boot gets a new directory under /metadata/boot-debug. The logger never
+# removes or truncates directories belonging to an earlier boot.
+allow init laurel_boot_debug_file:dir create_dir_perms;
+allow laurel_boot_logger metadata_file:dir search;
+allow laurel_boot_logger laurel_boot_debug_file:dir create_dir_perms;
+allow laurel_boot_logger laurel_boot_debug_file:file create_file_perms;
+
+# Read Android's log buffers by executing logcat without changing domain.
+allow laurel_boot_logger logcat_exec:file rx_file_perms;
+read_logd(laurel_boot_logger)
+get_prop(laurel_boot_logger, logd_prop)
+
+# Persistent early kernel and mount diagnostics.
+allow laurel_boot_logger kernel:system syslog_read;
+allow laurel_boot_logger kmsg_device:chr_file r_file_perms;
+allow laurel_boot_logger proc_cmdline:file r_file_perms;
+allow laurel_boot_logger proc_filesystems:file r_file_perms;
+allow laurel_boot_logger proc_mounts:file r_file_perms;
+allow laurel_boot_logger proc_version:file r_file_perms;
+allow laurel_boot_logger proc:dir r_dir_perms;
+
+# State snapshots are best-effort; inaccessible device-specific nodes are
+# recorded as unavailable instead of weakening policy globally.
+allow laurel_boot_logger device:dir r_dir_perms;
+allow laurel_boot_logger block_device:dir r_dir_perms;
+allow laurel_boot_logger block_device:lnk_file r_file_perms;
+allow laurel_boot_logger sysfs:dir r_dir_perms;
+allow laurel_boot_logger sysfs:lnk_file r_file_perms;
+r_dir_file(laurel_boot_logger, sysfs_dm)
+allow laurel_boot_logger selinuxfs:file r_file_perms;
