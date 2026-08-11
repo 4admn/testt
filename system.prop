@@ -28,7 +28,6 @@ persist.dbg.vt_avail_ovr=1
 persist.dbg.wfc_avail_ovr=1
 
 # LMKD
-ro.config.low_ram=true
 ro.config.force_multi_window=true
 # Keep Private Space available despite low-RAM optimizations.
 ro.config.allow_private_space_on_low_ram=true
