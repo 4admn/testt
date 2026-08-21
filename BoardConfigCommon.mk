@@ -66,7 +66,7 @@ BOARD_KERNEL_CMDLINE += buildvariant=user
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
 
 TARGET_KERNEL_SOURCE := kernel/xiaomi/sm6125_5.15
-TARGET_KERNEL_CONFIG := vendor/trinket-perf_defconfig vendor/xiaomi-trinket.config
+TARGET_KERNEL_CONFIG := gki_defconfig vendor/trinket_GKI.config vendor/xiaomi-trinket.config
 TARGET_DTB_LIST_WILDCARD := qcom/sm6125-xiaomi-laurel-sprout
 TARGET_DTBO_LIST_WILDCARD := qcom/sm6125-xiaomi-laurel-sprout-overlay
 
